@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Traffic and NTP Statistics for eth0 - Server Status</title>
+    <style>
+        :root {
+            --primary-text: #212529;
+            --secondary-text: #6c757d;
+            --background-color: #f8f9fa;
+            --content-background: #ffffff;
+            --border-color: #dee2e6;
+            --code-background: #282c34;
+            --code-text: #abb2bf;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--primary-text);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--content-background);
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        header {
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: var(--primary-text);
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-text);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-size: 1.3em;
+            color: var(--primary-text);
+            margin-top: 25px;
+        }
+        .graph-grid {
+            display: grid;
+            /* Par défaut : une seule colonne pour les petits écrans (mobile) */
+            grid-template-columns: 1fr;
+            gap: 20px;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .graph-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        figure {
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        pre {
+            background-color: var(--code-background);
+            color: var(--code-text);
+            padding: 15px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9em;
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+	<main>
+            <section id="chrony-graphs">
+                <h2>Chrony Graphs</h2>
+                <div class="graph-grid">
+                    <figure>
+                        <img src="img/chrony_serverstats.png" alt="Chrony server statistics graph">
+                    </figure>
+                    <figure>
+                        <img src="img/chrony_offset.png" alt="Chrony system clock offset graph">
+                    </figure>
+                    <figure>
+                        <img src="img/chrony_tracking.png" alt="Chrony system clock tracking graph">
+                    </figure>
+                    <figure>
+                        <img src="img/chrony_delay.png" alt="Chrony sync delay graph">
+                    </figure>
+                    <figure>
+                        <img src="img/chrony_frequency.png" alt="Chrony clock frequency graph">
+                    </figure>
+                    <figure>
+                        <img src="img/chrony_drift.png" alt="Chrony clock frequency drift graph">
+                    </figure>
+                </div>
+            </section>
+
+            <section id="vnstat-graphs">
+                <h2>vnStati  Graphs</h2>
+                <div class="graph-grid">
+                    <figure>
+                        <img src="img/vnstat_s.png" alt="vnStat live traffic graph">
+                    </figure>
+                    <figure>
+                        <img src="img/vnstat_h.png" alt="vnStat hourly traffic graph">
+                     </figure>
+                    <figure>
+                        <img src="img/vnstat_d.png" alt="vnStat daily traffic graph">
+                     </figure>
+                    <figure>
+                        <img src="img/vnstat_m.png" alt="vnStat monthly traffic graph">
+                    </figure>
+                     <figure>
+                        <img src="img/vnstat_y.png" alt="vnStat yearly traffic graph">
+                    </figure>
+                    <figure>
+                        <img src="img/vnstat_t.png" alt="vnStat top 10 days traffic graph">
+                    </figure>
+                </div>
+            </section>
+
+            <section id="chrony-stats">
+                <h2>Chrony - NTP Statistics</h2>
+
+                <h3>Command: <code>chronyc sources -v</code></h3>
+                <pre><code><br>
+  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.<br>
+ / .- Source state '*' = current best, '+' = combined, '-' = not combined,<br>
+| /             'x' = may be in error, '~' = too variable, '?' = unusable.<br>
+||                                                 .- xxxx [ yyyy ] +/- zzzz<br>
+||      Reachability register (octal) -.           |  xxxx = adjusted offset,<br>
+||      Log2(Polling interval) --.      |          |  yyyy = measured offset,<br>
+||                                \     |          |  zzzz = estimated error.<br>
+||                                 |    |           \<br>
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               <br>
+===============================================================================<br>
+^? server1                       1  10   377   783   +129us[ +129us] +/-   10ms<br>
+^? server2                       3  10   377   720  -2431us[-2431us] +/-   17ms<br>
+^? server3                       3  10   377   876  -1167us[-1125us] +/- 8325us<br>
+^* server4                       1  10   377   827    -39us[+3474ns] +/- 5539us<br>
+^- server5                       2  10   377   766  +1812us[+1812us] +/-   17ms<br>
+^- server6                       1  10   377   469  +6841us[+6841us] +/-   16ms<br></code></pre>
+
+                <h3>Command: <code>chronyc selectdata -v</code></h3>
+                <pre><code>  . State: N - noselect, s - unsynchronised, M - missing samples,<br>
+ /         d/D - large distance, ~ - jittery, w/W - waits for others,<br>
+|          S - stale, O - orphan, T - not trusted, P - not preferred,<br>
+|          U - waits for update,, x - falseticker, + - combined, * - best.<br>
+|   Effective options   ---------.  (N - noselect, P - prefer<br>
+|   Configured options  ----.     \  T - trust, R - require)<br>
+|   Auth. enabled (Y/N) -.   \     \     Offset interval --.<br>
+|                        |    |     |                       |<br>
+S Name/IP Address        Auth COpts EOpts Last Score     Interval  Leap<br>
+=======================================================================<br>
+T server1                   N ----- -----  314   1.0   -10ms   +10ms  N<br>
+T server2                   Y ----- --TR-  250   1.0   -20ms   +14ms  N<br>
+T server3                   N ----- -----  406   1.0 -9597us +7256us  N<br>
+* server4                   Y ----- --TR-  357   1.0 -5570us +5328us  N<br>
+D server5                   Y ----- --TR-  296   1.0   -13ms   +20ms  N<br>
+D server6                   N ----- -----    0   1.0 -9509us   +12ms  N<br></code></pre>
+
+                <h3>Command: <code>chronyc sourcestats -v</code></h3>
+                <pre><code>                             .- Number of sample points in measurement set.<br>
+                            /    .- Number of residual runs with same sign.<br>
+                           |    /    .- Length of measurement set (time).<br>
+                           |   |    /      .- Est. clock freq error (ppm).<br>
+                           |   |   |      /           .- Est. error in freq.<br>
+                           |   |   |     |           /         .- Est. offset.<br>
+                           |   |   |     |          |          |   On the -.<br>
+                           |   |   |     |          |          |   samples. \<br>
+                           |   |   |     |          |          |             |<br>
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev<br>
+==============================================================================<br>
+server1                    33  19  569m     +0.005      0.009   +198us   149us<br>
+server2                    24  10  413m     +0.016      0.037  -2602us   372us<br>
+server3                     6   5  103m     -0.009      0.250   -795us   129us<br>
+server4                    34  16  585m     +0.000      0.024   +319ns   402us<br>
+server5                    18   9  293m     +0.012      0.108  +3024us   556us<br>
+server6                    11   6  189m     -0.038      0.630  +2752us  1680us<br></code></pre>
+
+                <h3>Command: <code>chronyc tracking</code></h3>
+                <pre><code>Reference ID    : ERRGGDFB (server1)<br>
+Stratum         : 2<br>
+Ref time (UTC)  : Sun Jun 07 12:33:14 2025<br>
+System time     : 0.000150440 seconds fast of NTP time<br>
+Last offset     : +0.00001202175 seconds<br>
+RMS offset      : 0.0001456579 seconds<br>
+Frequency       : 2.231 ppm fast<br>
+Residual freq   : +0.001 ppm<br>
+Skew            : 0.030 ppm<br>
+Root delay      : 0.0107214526 seconds<br>
+Root dispersion : 0.0010245287 seconds<br>
+Update interval : 136.2 seconds<br>
+Leap status     : Normal<br></code></pre>
+            </section>
+        </main>
+
+        <footer>
+            <p>Page generated on: Sun Jun  7 12:33:14 UTC 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
