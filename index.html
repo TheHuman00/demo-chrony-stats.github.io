@@ -52,6 +52,12 @@
             margin-top: 0;
             margin-bottom: 20px;
         }
+        h2 a {
+            font-size: 0.8em;
+            font-weight: normal;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
         h3 {
             font-size: 1.3em;
             color: var(--primary-text);
@@ -72,7 +78,7 @@
                 text-align: center;
             }
         }
-	.graph-grid {
+	    .graph-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
@@ -119,7 +125,7 @@
     <div class="container">
 	<main>
             <section id="chrony-graphs">
-                <h2>Chrony Graphs</h2>
+                <h2>Chrony Graphs <a target="_blank" href="https://chrony-project.org/doc/4.3/chronyc.html#:~:text=System%20clock-,tracking,-The%20tracking%20command">[Data Legend]</a></h2>
                 <div class="graph-grid">
                     <figure>
                         <img src="img/chrony_serverstats.png" alt="Chrony server statistics graph">
