@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +23,10 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background-color: var(--content-background);
-            padding: 20px 40px;
+            padding: 20px 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
@@ -58,10 +57,25 @@
             color: var(--primary-text);
             margin-top: 25px;
         }
-        .graph-grid {
+        @media (max-width: 767px) {
+            #vnstat-graphs table,
+            #vnstat-graphs tbody,
+            #vnstat-graphs tr,
+            #vnstat-graphs td {
+                display: block;
+                width: 100%;
+            }
+
+            #vnstat-graphs td {
+                padding-left: 0;
+                padding-right: 0;
+                text-align: center;
+            }
+        }
+	.graph-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 10px;
             text-align: center;
         }
         @media (min-width: 768px) {
@@ -108,48 +122,44 @@
                 <h2>Chrony Graphs</h2>
                 <div class="graph-grid">
                     <figure>
-                        <img src="img/chrony_serverstats.png" alt="Chrony server statistics graph">
+                        <img src="chrony_serverstats.png" alt="Chrony server statistics graph">
                     </figure>
                     <figure>
-                        <img src="img/chrony_offset.png" alt="Chrony system clock offset graph">
+                        <img src="chrony_offset.png" alt="Chrony system clock offset graph">
                     </figure>
                     <figure>
-                        <img src="img/chrony_tracking.png" alt="Chrony system clock tracking graph">
+                        <img src="chrony_tracking.png" alt="Chrony system clock tracking graph">
                     </figure>
                     <figure>
-                        <img src="img/chrony_delay.png" alt="Chrony sync delay graph">
+                        <img src="chrony_delay.png" alt="Chrony sync delay graph">
                     </figure>
                     <figure>
-                        <img src="img/chrony_frequency.png" alt="Chrony clock frequency graph">
+                        <img src="chrony_frequency.png" alt="Chrony clock frequency graph">
                     </figure>
                     <figure>
-                        <img src="img/chrony_drift.png" alt="Chrony clock frequency drift graph">
+                        <img src="chrony_drift.png" alt="Chrony clock frequency drift graph">
                     </figure>
                 </div>
             </section>
 
-            <section id="vnstat-graphs">
-                <h2>vnStati  Graphs</h2>
-                <div class="graph-grid">
-                    <figure>
-                        <img src="img/vnstat_s.png" alt="vnStat live traffic graph">
-                    </figure>
-                    <figure>
-                        <img src="img/vnstat_h.png" alt="vnStat hourly traffic graph">
-                     </figure>
-                    <figure>
-                        <img src="img/vnstat_d.png" alt="vnStat daily traffic graph">
-                     </figure>
-                    <figure>
-                        <img src="img/vnstat_m.png" alt="vnStat monthly traffic graph">
-                    </figure>
-                     <figure>
-                        <img src="img/vnstat_y.png" alt="vnStat yearly traffic graph">
-                    </figure>
-                    <figure>
-                        <img src="img/vnstat_t.png" alt="vnStat top 10 days traffic graph">
-                    </figure>
-                </div>
+	    <section id="vnstat-graphs">
+                <h2>vnStati Graphs</h2>
+                <table border="0" style="margin-left: auto; margin-right: auto;">
+                    <tbody>
+                        <tr>
+                            <td valign="top" style="padding: 0 10px;">
+                                <img src="vnstat_s.png" alt="vnStat summary"><br>
+                                <img src="vnstat_d.png" alt="vnStat daily" style="margin-top: 4px;"><br>
+                                <img src="vnstat_t.png" alt="vnStat top 10" style="margin-top: 4px;"><br>
+                            </td>
+                            <td valign="top" style="padding: 0 10px;">
+                                <img src="vnstat_h.png" alt="vnStat hourly"><br>
+                                <img src="vnstat_m.png" alt="vnStat monthly" style="margin-top: 4px;"><br>
+                                <img src="vnstat_y.png" alt="vnStat yearly" style="margin-top: 4px;"><br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
             <section id="chrony-stats">
@@ -168,7 +178,7 @@
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               <br>
 ===============================================================================<br>
 ^? server1                       1  10   377   783   +129us[ +129us] +/-   10ms<br>
-^? server2                       3  10   377   720  -2431us[-2431us] +/-   17ms<br>
+^+ server2                       3  10   377   720  -2431us[-2431us] +/-   17ms<br>
 ^? server3                       3  10   377   876  -1167us[-1125us] +/- 8325us<br>
 ^* server4                       1  10   377   827    -39us[+3474ns] +/- 5539us<br>
 ^- server5                       2  10   377   766  +1812us[+1812us] +/-   17ms<br>
@@ -186,7 +196,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample               <
 S Name/IP Address        Auth COpts EOpts Last Score     Interval  Leap<br>
 =======================================================================<br>
 T server1                   N ----- -----  314   1.0   -10ms   +10ms  N<br>
-T server2                   Y ----- --TR-  250   1.0   -20ms   +14ms  N<br>
++ server2                   Y ----- --TR-  250   1.0   -20ms   +14ms  N<br>
 T server3                   N ----- -----  406   1.0 -9597us +7256us  N<br>
 * server4                   Y ----- --TR-  357   1.0 -5570us +5328us  N<br>
 D server5                   Y ----- --TR-  296   1.0   -13ms   +20ms  N<br>
@@ -229,8 +239,7 @@ Leap status     : Normal<br></code></pre>
         </main>
 
         <footer>
-            <p>Page generated on: Sun Jun  7 12:33:14 UTC 2025</p>
+            <p>Page generated on: Tue Jun 08 15:10:02 UTC 2025</p>
         </footer>
     </div>
-</body>
 </html>
