@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Chrony-Stats HTML</title>
+    <title>Network Traffic and Chrony Statistics for ens6 - Server Status</title>
     <style>
         :root {
             --primary-text: #212529;
@@ -63,7 +63,7 @@
             color: var(--primary-text);
             margin-top: 25px;
         }
-        @media (max-width: 767px) {
+	@media (max-width: 767px) {
             #vnstat-graphs table,
             #vnstat-graphs tbody,
             #vnstat-graphs tr,
@@ -78,7 +78,7 @@
                 text-align: center;
             }
         }
-	    .graph-grid {
+        .graph-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
@@ -119,6 +119,35 @@
             font-size: 0.9em;
             color: var(--secondary-text);
         }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            margin-right: 2px;
+            transition: background-color 0.3s;
+        }
+        .tab:hover {
+            background-color: #e9ecef;
+        }
+        .tab.active {
+            background-color: var(--content-background);
+            border-bottom: 1px solid var(--content-background);
+            margin-bottom: -1px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -126,25 +155,80 @@
 	<main>
             <section id="chrony-graphs">
                 <h2>Chrony Graphs <a target="_blank" href="https://chrony-project.org/doc/4.3/chronyc.html#:~:text=System%20clock-,tracking,-The%20tracking%20command">[Data Legend]</a></h2>
-                <div class="graph-grid">
-                    <figure>
-                        <img src="img/chrony_serverstats.png" alt="Chrony server statistics graph">
-                    </figure>
-                    <figure>
-                        <img src="img/chrony_offset.png" alt="Chrony system clock offset graph">
-                    </figure>
-                    <figure>
-                        <img src="img/chrony_tracking.png" alt="Chrony system clock tracking graph">
-                    </figure>
-                    <figure>
-                        <img src="img/chrony_delay.png" alt="Chrony sync delay graph">
-                    </figure>
-                    <figure>
-                        <img src="img/chrony_frequency.png" alt="Chrony clock frequency graph">
-                    </figure>
-                    <figure>
-                        <img src="img/chrony_drift.png" alt="Chrony clock frequency drift graph">
-                    </figure>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="if (!window.__cfRLUnblockHandlers) return false; showTab('day')" data-cf-modified-4f907e4f2c9865b772021573-="">Day</div>
+                    <div class="tab" onclick="if (!window.__cfRLUnblockHandlers) return false; showTab('week')" data-cf-modified-4f907e4f2c9865b772021573-="">Week</div>
+                    <div class="tab" onclick="if (!window.__cfRLUnblockHandlers) return false; showTab('month')" data-cf-modified-4f907e4f2c9865b772021573-="">Month</div>
+                </div>
+                
+                <div id="day-content" class="tab-content active">
+                    <div class="graph-grid">
+                        <figure>
+                            <img src="img/chrony_serverstats_day.png" alt="Chrony server statistics graph - day">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_offset_day.png" alt="Chrony system clock offset graph - day">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_tracking_day.png" alt="Chrony system clock tracking graph - day">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_delay_day.png" alt="Chrony sync delay graph - day">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_frequency_day.png" alt="Chrony clock frequency graph - day">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_drift_day.png" alt="Chrony clock frequency drift graph - day">
+                        </figure>
+                    </div>
+                </div>
+                
+                <div id="week-content" class="tab-content">
+                    <div class="graph-grid">
+                        <figure>
+                            <img src="img/chrony_serverstats_week.png" alt="Chrony server statistics graph - week">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_offset_week.png" alt="Chrony system clock offset graph - week">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_tracking_week.png" alt="Chrony system clock tracking graph - week">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_delay_week.png" alt="Chrony sync delay graph - week">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_frequency_week.png" alt="Chrony clock frequency graph - week">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_drift_week.png" alt="Chrony clock frequency drift graph - week">
+                        </figure>
+                    </div>
+                </div>
+                
+                <div id="month-content" class="tab-content">
+                    <div class="graph-grid">
+                        <figure>
+                            <img src="img/chrony_serverstats_month.png" alt="Chrony server statistics graph - month">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_offset_month.png" alt="Chrony system clock offset graph - month">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_tracking_month.png" alt="Chrony system clock tracking graph - month">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_delay_month.png" alt="Chrony sync delay graph - month">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_frequency_month.png" alt="Chrony clock frequency graph - month">
+                        </figure>
+                        <figure>
+                            <img src="img/chrony_drift_month.png" alt="Chrony clock frequency drift graph - month">
+                        </figure>
+                    </div>
                 </div>
             </section>
 
@@ -248,4 +332,14 @@ Leap status     : Normal<br></code></pre>
             <p>Page generated on: Tue Jun 08 15:10:02 UTC 2025</p>
         </footer>
     </div>
+        <script>
+        function showTab(period) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.getElementById(period + '-content').classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
 </html>
