@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Traffic and Chrony Statistics for ens6 - Server Status</title>
-    <style>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Network Traffic and Chrony Statistics for ens6 - Server
+            Status</title>
+        <style>
         :root {
             --primary-text: #212529;
             --secondary-text: #6c757d;
@@ -149,114 +150,148 @@
             display: block;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-	<main>
-            <section id="chrony-graphs">
-                <h2>Chrony Graphs <a target="_blank" href="https://chrony-project.org/doc/4.3/chronyc.html#:~:text=System%20clock-,tracking,-The%20tracking%20command">[Data Legend]</a></h2>
-                
-                <div class="tabs">
-                    <div class="tab active" onclick="if (!window.__cfRLUnblockHandlers) return false; showTab('day')" data-cf-modified-4f907e4f2c9865b772021573-="">Day</div>
-                    <div class="tab" onclick="if (!window.__cfRLUnblockHandlers) return false; showTab('week')" data-cf-modified-4f907e4f2c9865b772021573-="">Week</div>
-                    <div class="tab" onclick="if (!window.__cfRLUnblockHandlers) return false; showTab('month')" data-cf-modified-4f907e4f2c9865b772021573-="">Month</div>
-                </div>
-                
-                <div id="day-content" class="tab-content active">
-                    <div class="graph-grid">
-                        <figure>
-                            <img src="img/chrony_serverstats_day.png" alt="Chrony server statistics graph - day">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_offset_day.png" alt="Chrony system clock offset graph - day">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_tracking_day.png" alt="Chrony system clock tracking graph - day">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_delay_day.png" alt="Chrony sync delay graph - day">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_frequency_day.png" alt="Chrony clock frequency graph - day">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_drift_day.png" alt="Chrony clock frequency drift graph - day">
-                        </figure>
-                    </div>
-                </div>
-                
-                <div id="week-content" class="tab-content">
-                    <div class="graph-grid">
-                        <figure>
-                            <img src="img/chrony_serverstats_week.png" alt="Chrony server statistics graph - week">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_offset_week.png" alt="Chrony system clock offset graph - week">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_tracking_week.png" alt="Chrony system clock tracking graph - week">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_delay_week.png" alt="Chrony sync delay graph - week">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_frequency_week.png" alt="Chrony clock frequency graph - week">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_drift_week.png" alt="Chrony clock frequency drift graph - week">
-                        </figure>
-                    </div>
-                </div>
-                
-                <div id="month-content" class="tab-content">
-                    <div class="graph-grid">
-                        <figure>
-                            <img src="img/chrony_serverstats_month.png" alt="Chrony server statistics graph - month">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_offset_month.png" alt="Chrony system clock offset graph - month">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_tracking_month.png" alt="Chrony system clock tracking graph - month">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_delay_month.png" alt="Chrony sync delay graph - month">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_frequency_month.png" alt="Chrony clock frequency graph - month">
-                        </figure>
-                        <figure>
-                            <img src="img/chrony_drift_month.png" alt="Chrony clock frequency drift graph - month">
-                        </figure>
-                    </div>
-                </div>
-            </section>
+    </head>
+    <body>
+        <div class="container">
+            <main>
+                <section id="chrony-graphs">
+                    <h2>Chrony Graphs <a target="_blank"
+                            href="https://chrony-project.org/doc/4.3/chronyc.html#:~:text=System%20clock-,tracking,-The%20tracking%20command">[Data
+                            Legend]</a></h2>
 
-	    <section id="vnstat-graphs">
-                <h2>vnStati Graphs</h2>
-                <table border="0" style="margin-left: auto; margin-right: auto;">
-                    <tbody>
-                        <tr>
-                            <td valign="top" style="padding: 0 10px;">
-                                <img src="img/vnstat_s.png" alt="vnStat summary"><br>
-                                <img src="img/vnstat_d.png" alt="vnStat daily" style="margin-top: 4px;"><br>
-                                <img src="img/vnstat_t.png" alt="vnStat top 10" style="margin-top: 4px;"><br>
-                            </td>
-                            <td valign="top" style="padding: 0 10px;">
-                                <img src="img/vnstat_h.png" alt="vnStat hourly"><br>
-                                <img src="img/vnstat_m.png" alt="vnStat monthly" style="margin-top: 4px;"><br>
-                                <img src="img/vnstat_y.png" alt="vnStat yearly" style="margin-top: 4px;"><br>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+                    <div class="tabs">
+                        <div class="tab active"
+                            onclick="showTab('day', this)">Day</div>
+                        <div class="tab"
+                            onclick="showTab('week', this)">Week</div>
+                        <div class="tab"
+                            onclick="showTab('month', this)">Month</div>
+                    </div>
 
-            <section id="chrony-stats">
-                <h2>Chrony - NTP Statistics</h2>
+                    <div id="day-content" class="tab-content active">
+                        <div class="graph-grid">
+                            <figure>
+                                <img src="img/chrony_serverstats_day.png"
+                                    alt="Chrony server statistics graph - day">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_offset_day.png"
+                                    alt="Chrony system clock offset graph - day">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_tracking_day.png"
+                                    alt="Chrony system clock tracking graph - day">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_delay_day.png"
+                                    alt="Chrony sync delay graph - day">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_frequency_day.png"
+                                    alt="Chrony clock frequency graph - day">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_drift_day.png"
+                                    alt="Chrony clock frequency drift graph - day">
+                            </figure>
+                        </div>
+                    </div>
 
-                <h3>Command: <code>chronyc sources -v</code></h3>
-                <pre><code><br>
+                    <div id="week-content" class="tab-content">
+                        <div class="graph-grid">
+                            <figure>
+                                <img src="img/chrony_serverstats_week.png"
+                                    alt="Chrony server statistics graph - week">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_offset_week.png"
+                                    alt="Chrony system clock offset graph - week">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_tracking_week.png"
+                                    alt="Chrony system clock tracking graph - week">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_delay_week.png"
+                                    alt="Chrony sync delay graph - week">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_frequency_week.png"
+                                    alt="Chrony clock frequency graph - week">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_drift_week.png"
+                                    alt="Chrony clock frequency drift graph - week">
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div id="month-content" class="tab-content">
+                        <div class="graph-grid">
+                            <figure>
+                                <img src="img/chrony_serverstats_month.png"
+                                    alt="Chrony server statistics graph - month">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_offset_month.png"
+                                    alt="Chrony system clock offset graph - month">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_tracking_month.png"
+                                    alt="Chrony system clock tracking graph - month">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_delay_month.png"
+                                    alt="Chrony sync delay graph - month">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_frequency_month.png"
+                                    alt="Chrony clock frequency graph - month">
+                            </figure>
+                            <figure>
+                                <img src="img/chrony_drift_month.png"
+                                    alt="Chrony clock frequency drift graph - month">
+                            </figure>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="vnstat-graphs">
+                    <h2>vnStati Graphs</h2>
+                    <table border="0"
+                        style="margin-left: auto; margin-right: auto;">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="padding: 0 10px;">
+                                    <img src="img/vnstat_s.png"
+                                        alt="vnStat summary"><br>
+                                    <img src="img/vnstat_d.png"
+                                        alt="vnStat daily"
+                                        style="margin-top: 4px;"><br>
+                                    <img src="img/vnstat_t.png"
+                                        alt="vnStat top 10"
+                                        style="margin-top: 4px;"><br>
+                                </td>
+                                <td valign="top" style="padding: 0 10px;">
+                                    <img src="img/vnstat_h.png"
+                                        alt="vnStat hourly"><br>
+                                    <img src="img/vnstat_m.png"
+                                        alt="vnStat monthly"
+                                        style="margin-top: 4px;"><br>
+                                    <img src="img/vnstat_y.png"
+                                        alt="vnStat yearly"
+                                        style="margin-top: 4px;"><br>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="chrony-stats">
+                    <h2>Chrony - NTP Statistics</h2>
+
+                    <h3>Command: <code>chronyc sources -v</code></h3>
+                    <pre><code><br>
   .-- Source mode  '^' = server, '=' = peer, '#' = local clock.<br>
  / .- Source state '*' = current best, '+' = combined, '-' = not combined,<br>
 | /             'x' = may be in error, '~' = too variable, '?' = unusable.<br>
@@ -274,8 +309,8 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample               <
 ^- server5                       2  10   377   766  +1812us[+1812us] +/-   17ms<br>
 ^- server6                       1  10   377   469  +6841us[+6841us] +/-   16ms<br></code></pre>
 
-                <h3>Command: <code>chronyc selectdata -v</code></h3>
-                <pre><code>  . State: N - noselect, s - unsynchronised, M - missing samples,<br>
+                    <h3>Command: <code>chronyc selectdata -v</code></h3>
+                    <pre><code>  . State: N - noselect, s - unsynchronised, M - missing samples,<br>
  /         d/D - large distance, ~ - jittery, w/W - waits for others,<br>
 |          S - stale, O - orphan, T - not trusted, P - not preferred,<br>
 |          U - waits for update,, x - falseticker, + - combined, * - best.<br>
@@ -292,8 +327,8 @@ T server3                   N ----- -----  406   1.0 -9597us +7256us  N<br>
 D server5                   Y ----- --TR-  296   1.0   -13ms   +20ms  N<br>
 D server6                   N ----- -----    0   1.0 -9509us   +12ms  N<br></code></pre>
 
-                <h3>Command: <code>chronyc sourcestats -v</code></h3>
-                <pre><code>                             .- Number of sample points in measurement set.<br>
+                    <h3>Command: <code>chronyc sourcestats -v</code></h3>
+                    <pre><code>                             .- Number of sample points in measurement set.<br>
                             /    .- Number of residual runs with same sign.<br>
                            |    /    .- Length of measurement set (time).<br>
                            |   |    /      .- Est. clock freq error (ppm).<br>
@@ -311,8 +346,8 @@ server4                    34  16  585m     +0.000      0.024   +319ns   402us<b
 server5                    18   9  293m     +0.012      0.108  +3024us   556us<br>
 server6                    11   6  189m     -0.038      0.630  +2752us  1680us<br></code></pre>
 
-                <h3>Command: <code>chronyc tracking</code></h3>
-                <pre><code>Reference ID    : ERRGGDFB (server1)<br>
+                    <h3>Command: <code>chronyc tracking</code></h3>
+                    <pre><code>Reference ID    : ERRGGDFB (server1)<br>
 Stratum         : 2<br>
 Ref time (UTC)  : Sun Jun 07 12:33:14 2025<br>
 System time     : 0.000150440 seconds fast of NTP time<br>
@@ -325,21 +360,21 @@ Root delay      : 0.0107214526 seconds<br>
 Root dispersion : 0.0010245287 seconds<br>
 Update interval : 136.2 seconds<br>
 Leap status     : Normal<br></code></pre>
-            </section>
-        </main>
+                </section>
+            </main>
 
-        <footer>
-            <p>Page generated on: Tue Jun 08 15:10:02 UTC 2025</p>
-        </footer>
-    </div>
+            <footer>
+                <p>Page generated on: Tue Jun 08 15:10:02 UTC 2025</p>
+            </footer>
+        </div>
         <script>
-        function showTab(period) {
+        function showTab(period, clickedTab) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
             document.getElementById(period + '-content').classList.add('active');
-            event.target.classList.add('active');
+            clickedTab.classList.add('active');
         }
     </script>
-</html>
+    </html>
