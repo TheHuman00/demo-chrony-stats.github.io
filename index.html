@@ -308,91 +308,93 @@
                     </table>
                 </section>
 
-                <section id="chrony-stats">
-                    <h2>Chrony - NTP Statistics</h2>
+            <section id="chrony-stats">
+                <h2>Chrony - NTP Statistics</h2>
 
-                    <h3>Command: <code>chronyc sources -v</code></h3>
-                    <pre><code><br>
-  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.<br>
- / .- Source state '*' = current best, '+' = combined, '-' = not combined,<br>
-| /             'x' = may be in error, '~' = too variable, '?' = unusable.<br>
-||                                                 .- xxxx [ yyyy ] +/- zzzz<br>
-||      Reachability register (octal) -.           |  xxxx = adjusted offset,<br>
-||      Log2(Polling interval) --.      |          |  yyyy = measured offset,<br>
-||                                \     |          |  zzzz = estimated error.<br>
-||                                 |    |           \<br>
-MS Name/IP address         Stratum Poll Reach LastRx Last sample               <br>
-===============================================================================<br>
-^? server1                       1  10   377   783   +129us[ +129us] +/-   10ms<br>
-^+ server2                       3  10   377   720  -2431us[-2431us] +/-   17ms<br>
-^? server3                       3  10   377   876  -1167us[-1125us] +/- 8325us<br>
-^* server4                       1  10   377   827    -39us[+3474ns] +/- 5539us<br>
-^- server5                       2  10   377   766  +1812us[+1812us] +/-   17ms<br>
-^- server6                       1  10   377   469  +6841us[+6841us] +/-   16ms<br></code></pre>
+                <h3>Command: <code>chronyc sources -v</code></h3>
+                <pre><code>
+  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
+ / .- Source state '*' = current best, '+' = combined, '-' = not combined,
+| /             'x' = may be in error, '~' = too variable, '?' = unusable.
+||                                                 .- xxxx [ yyyy ] +/- zzzz
+||      Reachability register (octal) -.           |  xxxx = adjusted offset,
+||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
+||                                \     |          |  zzzz = estimated error.
+||                                 |    |           \
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+^+ server1                       1  10   377   783   +129us[ +129us] +/-   10ms
+^* server2                       3  10   377   720  -2431us[-2431us] +/-   17ms
+^+ server3                       3  10   377   876  -1167us[-1125us] +/- 8325us
+^+ server4                       1  10   377   827    -39us[+3474ns] +/- 5539us
+^+ server5                       2  10   377   766  +1812us[+1812us] +/-   17ms
+^? server6                       1  10   377   469  +6841us[+6841us] +/-   16ms</code></pre>
 
-                    <h3>Command: <code>chronyc selectdata -v</code></h3>
-                    <pre><code>  . State: N - noselect, s - unsynchronised, M - missing samples,<br>
- /         d/D - large distance, ~ - jittery, w/W - waits for others,<br>
-|          S - stale, O - orphan, T - not trusted, P - not preferred,<br>
-|          U - waits for update,, x - falseticker, + - combined, * - best.<br>
-|   Effective options   ---------.  (N - noselect, P - prefer<br>
-|   Configured options  ----.     \  T - trust, R - require)<br>
-|   Auth. enabled (Y/N) -.   \     \     Offset interval --.<br>
-|                        |    |     |                       |<br>
-S Name/IP Address        Auth COpts EOpts Last Score     Interval  Leap<br>
-=======================================================================<br>
-T server1                   N ----- -----  314   1.0   -10ms   +10ms  N<br>
-+ server2                   Y ----- --TR-  250   1.0   -20ms   +14ms  N<br>
-T server3                   N ----- -----  406   1.0 -9597us +7256us  N<br>
-* server4                   Y ----- --TR-  357   1.0 -5570us +5328us  N<br>
-D server5                   Y ----- --TR-  296   1.0   -13ms   +20ms  N<br>
-D server6                   N ----- -----    0   1.0 -9509us   +12ms  N<br></code></pre>
+                <h3>Command: <code>chronyc selectdata -v</code></h3>
+                <pre><code>  . State: N - noselect, s - unsynchronised, M - missing samples,
+ /         d/D - large distance, ~ - jittery, w/W - waits for others,
+|          S - stale, O - orphan, T - not trusted, P - not preferred,
+|          U - waits for update,, x - falseticker, + - combined, * - best.
+|   Effective options   ---------.  (N - noselect, P - prefer
+|   Configured options  ----.     \  T - trust, R - require)
+|   Auth. enabled (Y/N) -.   \     \     Offset interval --.
+|                        |    |     |                       |
+S Name/IP Address        Auth COpts EOpts Last Score     Interval  Leap
+=======================================================================
+T server1                   N ----- -----  314   1.0   -10ms   +10ms  N
++ server2                   Y ----- --TR-  250   1.0   -20ms   +14ms  N
+T server3                   N ----- -----  406   1.0 -9597us +7256us  N
+* server4                   Y ----- --TR-  357   1.0 -5570us +5328us  N
+D server5                   Y ----- --TR-  296   1.0   -13ms   +20ms  N
+D server6                   N ----- -----    0   1.0 -9509us   +12ms  N</code></pre>
 
-                    <h3>Command: <code>chronyc sourcestats -v</code></h3>
-                    <pre><code>                             .- Number of sample points in measurement set.<br>
-                            /    .- Number of residual runs with same sign.<br>
-                           |    /    .- Length of measurement set (time).<br>
-                           |   |    /      .- Est. clock freq error (ppm).<br>
-                           |   |   |      /           .- Est. error in freq.<br>
-                           |   |   |     |           /         .- Est. offset.<br>
-                           |   |   |     |          |          |   On the -.<br>
-                           |   |   |     |          |          |   samples. \<br>
-                           |   |   |     |          |          |             |<br>
-Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev<br>
-==============================================================================<br>
-server1                    33  19  569m     +0.005      0.009   +198us   149us<br>
-server2                    24  10  413m     +0.016      0.037  -2602us   372us<br>
-server3                     6   5  103m     -0.009      0.250   -795us   129us<br>
-server4                    34  16  585m     +0.000      0.024   +319ns   402us<br>
-server5                    18   9  293m     +0.012      0.108  +3024us   556us<br>
-server6                    11   6  189m     -0.038      0.630  +2752us  1680us<br></code></pre>
+                <h3>Command: <code>chronyc sourcestats -v</code></h3>
+                <pre><code>                             .- Number of sample points in measurement set.
+                            /    .- Number of residual runs with same sign.
+                           |    /    .- Length of measurement set (time).
+                           |   |    /      .- Est. clock freq error (ppm).
+                           |   |   |      /           .- Est. error in freq.
+                           |   |   |     |           /         .- Est. offset.
+                           |   |   |     |          |          |   On the -.
+                           |   |   |     |          |          |   samples. \
+                           |   |   |     |          |          |             |
+Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
+==============================================================================
+server1                    33  19  569m     +0.005      0.009   +198us   149us
+server2                    24  10  413m     +0.016      0.037  -2602us   372us
+server3                     6   5  103m     -0.009      0.250   -795us   129us
+server4                    34  16  585m     +0.000      0.024   +319ns   402us
+server5                    18   9  293m     +0.012      0.108  +3024us   556us
+server6                    11   6  189m     -0.038      0.630  +2752us  1680us</code></pre>
 
-                    <h3>Command: <code>chronyc tracking</code></h3>
-                    <pre><code>Reference ID    : ERRGGDFB (server1)<br>
-Stratum         : 2<br>
-Ref time (UTC)  : Sun Jun 07 12:33:14 2025<br>
-System time     : 0.000150440 seconds fast of NTP time<br>
-Last offset     : +0.00001202175 seconds<br>
-RMS offset      : 0.0001456579 seconds<br>
-Frequency       : 2.231 ppm fast<br>
-Residual freq   : +0.001 ppm<br>
-Skew            : 0.030 ppm<br>
-Root delay      : 0.0107214526 seconds<br>
-Root dispersion : 0.0010245287 seconds<br>
-Update interval : 136.2 seconds<br>
-Leap status     : Normal<br></code></pre>
-                </section>
-            </main>
+                <h3>Command: <code>chronyc tracking</code></h3>
+                <pre><code>Reference ID    : ERRG1DFB (server1)
+Stratum         : 2
+Ref time (UTC)  : Mon Apr 13 22:49:27 2026
+System time     : 0.000008504 seconds slow of NTP time
+Last offset     : -0.000010877 seconds
+RMS offset      : 0.000004380 seconds
+Frequency       : 0.757 ppm slow
+Residual freq   : -0.000 ppm
+Skew            : 0.012 ppm
+Root delay      : 0.007064573 seconds
+Root dispersion : 0.000135534 seconds
+Update interval : 19.8 seconds
+Leap status     : Normal</code></pre>
+            </section>
+        </main>
 
-            <footer>
-                <p>Page generated on: Tue Jun 08 15:10:02 UTC 2025</p>
-		<p>Made with ❤️ by TheHuman00 | <a href="https://github.com/TheHuman00/chrony-stats" target="_blank">View on GitHub</a></p>
-            </footer>
-        </div>
-		<div id="lightbox" class="lightbox-overlay" aria-hidden="true" role="dialog">
-        	<img id="lightbox-img" class="lightbox-img" alt="Expanded graph">
-    	</div>
-        <script>
+        <footer>
+            <p>Page generated on: Mon Apr 13 22:50:03 UTC 2026</p>
+            <p>Made with ❤️ by TheHuman00 | <a href="https://github.com/TheHuman00/chrony-stats" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-overlay" aria-hidden="true" role="dialog">
+        <img id="lightbox-img" class="lightbox-img" alt="Expanded graph">
+    </div>
+
+    <script type="061f4465af310e6da06cb463-text/javascript">
         function showTab(period) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
